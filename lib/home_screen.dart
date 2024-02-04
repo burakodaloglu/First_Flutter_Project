@@ -13,28 +13,40 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const Icon(FontAwesomeIcons.locationDot, color: Colors.grey),
-        title: const Text(
-          TextConstants.appBarTitle,
-          style: TextStyle(color: Colors.grey),
-        ),
-        centerTitle: false,
-        actions: [
-          Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Stack(
-              children: [
-                Icon(FontAwesomeIcons.bell, color: Colors.grey),
-                Container(
-                    child: const Text(".", style: TextStyle(color: Colors.red)))
-              ],
-            ),
-          )
-        ],
-      ),
+      appBar: _appBarWidget(),
     );
+  }
+
+  AppBar _appBarWidget() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      leading: const Icon(FontAwesomeIcons.locationDot, color: Colors.grey),
+      title: const Text(
+        TextConstants.appBarTitle,
+        style: TextStyle(color: Colors.grey),
+      ),
+      centerTitle: false,
+      actions: [
+        _notificationIcon()
+      ],
+    );
+  }
+
+  Padding _notificationIcon() {
+    return Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              Icon(FontAwesomeIcons.bell, color: Colors.grey),
+              Container(
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.red),
+                  child: const Text('.'),
+              )
+            ],
+          ),
+        );
   }
 }
