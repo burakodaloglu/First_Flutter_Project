@@ -8,5 +8,6 @@ class TextConstants {
   static const String appBarTitle = "Burak KODALOGLU";
   static const String popularPlace = "Popular place";
   static const String seeAll = "See all";
+  static const String recommendation = "Recommendation for you";
 
 }
