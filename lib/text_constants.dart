@@ -6,4 +6,7 @@ class TextConstants {
   static const String alreadyHave = "Already have account";
   static const String login = "Login";
   static const String appBarTitle = "Burak KODALOGLU";
+  static const String popularPlace = "Popular place";
+  static const String seeAll = "See all";
+
 }
