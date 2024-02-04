@@ -13,68 +13,87 @@ class HomeScreenWidget extends StatefulWidget {
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       appBar: _appBarWidget(),
-      body: Column(children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(TextConstants.popularPlace),
-            TextButton(
-                onPressed: () {}, child: const Text(TextConstants.seeAll)),
-          ],
+      body: ListView(children: [
+        _headLineRow(),
+        const SizedBox(height: 20),
+        SizedBox(
+          height: 200,
+          child: ListView.builder(
+            //physics: const NeverScrollableScrollPhysics(),
+              itemCount: 5,
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Padding(padding: const EdgeInsets.all(8),
+                  child: _popularPlaceCard(size));
+              }),
         ),
-        SizedBox(height: 20),
-        _popularPlaceCard(size),
+        _headLineRow()
       ]),
     );
   }
 
+  Row _headLineRow() {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(TextConstants.popularPlace),
+          TextButton(
+              onPressed: () {}, child: const Text(TextConstants.seeAll)),
+        ],
+      );
+  }
+
   Container _popularPlaceCard(Size size) {
     return Container(
-        height: 200,
-        width: size.width * 0.8,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-                image: NetworkImage(AssetPathConstants().popularImage),
-                fit: BoxFit.cover)),
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.4),borderRadius: BorderRadius.circular(10)),
-            child: const ListTile(
-              title: Text(
-                'Kawah Ijen',
-                style: TextStyle(color: Colors.white),
+      height: 200,
+      width: size.width * 0.8,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          image: DecorationImage(
+              image: NetworkImage(AssetPathConstants().popularImage),
+              fit: BoxFit.cover)),
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.4),
+              borderRadius: BorderRadius.circular(10)),
+          child: const ListTile(
+            title: Text(
+              'Kawah Ijen',
+              style: TextStyle(color: Colors.white),
+            ),
+            subtitle: Row(children: [
+              Icon(
+                FontAwesomeIcons.locationDot,
+                size: 15,
+                color: Colors.white,
               ),
-              subtitle: Row(children: [
-                Icon(
-                  FontAwesomeIcons.locationDot,
-                  size: 15,
-                  color: Colors.white,
-                ),
+              Text(
+                "Konum Detay",
+                style: TextStyle(color: Colors.white),
+              )
+            ]),
+            trailing: Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Icon(Icons.star, color: Colors.orange),
                 Text(
-                  "Konum Detay",
+                  "4.7",
                   style: TextStyle(color: Colors.white),
                 )
-              ]),
-              trailing: Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Icon(Icons.star, color: Colors.orange),
-                  Text(
-                    "4.7",
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              ),
+              ],
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 
   AppBar _appBarWidget() {
@@ -100,7 +119,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           Icon(FontAwesomeIcons.bell, color: Colors.grey),
           Container(
             decoration:
-                const BoxDecoration(shape: BoxShape.circle, color: Colors.red),
+            const BoxDecoration(shape: BoxShape.circle, color: Colors.red),
             child: const Text('.'),
           )
         ],
