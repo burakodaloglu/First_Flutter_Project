@@ -13,7 +13,9 @@ class HomeScreenWidget extends StatefulWidget {
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       appBar: _appBarWidget(),
       body: ListView(padding: const EdgeInsets.all(8), children: [
@@ -21,7 +23,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         SizedBox(
           height: 200,
           child: ListView.builder(
-              //physics: const NeverScrollableScrollPhysics(),
+            //physics: const NeverScrollableScrollPhysics(),
               itemCount: 5,
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
@@ -32,16 +34,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               }),
         ),
         _headLineRow(TextConstants.recommendation),
-        ListView.builder(
+        SizedBox(height: 200,
+        child: ListView.builder(
           itemCount: 15,
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
             return Padding(
-                padding: const EdgeInsets.all(8),
-                child: _recommendationPlacesCard(),
-            );
-          },
+              padding: const EdgeInsets.all(8),
+              child: _recommendationPlacesCard());
+          }),
         )
       ]),
     );
@@ -70,10 +72,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             text: '\$22',
             style: TextStyle(color: Colors.blue, fontSize: 18),
             children: <TextSpan>[
-          TextSpan(
-              text: "/Person",
-              style: TextStyle(color: Colors.grey, fontSize: 14))
-        ]));
+              TextSpan(
+                  text: "/Person",
+                  style: TextStyle(color: Colors.grey, fontSize: 14))
+            ]));
   }
 
   Column _cardLocationInfoText() {
@@ -189,7 +191,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           const Icon(FontAwesomeIcons.bell, color: Colors.grey),
           Container(
             decoration:
-                const BoxDecoration(shape: BoxShape.circle, color: Colors.red),
+            const BoxDecoration(shape: BoxShape.circle, color: Colors.red),
             child: const Text('.'),
           )
         ],
